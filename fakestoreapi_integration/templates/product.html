@@ -1,0 +1,87 @@
+<html>
+  <head>
+  <meta charset="utf8">
+  <title>Fakestoreapi Products</title>
+  </head>
+  <body>
+
+    {% if product %}
+    <div id="wrapper">
+      <div class="title">{{ product.title }}</div>
+      <div class="image-and-price">
+        <div class="image">
+          <img class="product-image" src="{{ product.image }}">
+          <div class="description">{{ product.description }}</div>
+        </div>
+        <div class="price">
+          ${{ product.price }}
+          <div class="add-to-cart"><button class="add-to-cart-button">Add to cart</button></div>
+        </div>
+
+      </div>
+
+
+
+      <!-- <div>{{ product.rating }}</div> -->
+    </div>
+    {% endif %}
+    
+    
+    
+  </body>
+
+  <style>
+    #wrapper {
+        max-width: 80%;
+        margin: auto;
+        border: 1px solid #000;
+        border-radius: 5px;
+        padding: 1em;
+        text-align: center;
+        font-family: Averta,sans-serif;
+    }
+
+    .title {
+        text-align: left;
+    }
+
+    .product-image {
+/*        height: 30%; */
+        max-height: 30rem;
+    }
+
+    .image {
+        max-width: 90%;
+        margin: auto;
+    }
+
+    .description {
+        margin-top: 1em;
+    }
+
+    .image-and-price {
+        display: grid;
+        grid-template-columns: 70% 30%;
+        margin-top: 1em;
+    }
+
+    .price {
+        margin-top: 0.5em;
+        line-height: 2.2em;
+        font-size: 4em;
+        font-weight: 600;
+    }
+
+    .add-to-cart-button {
+        background: #ccc;
+        color: #000;
+        border: none;
+        border-radius: 50em;
+        width: 100%;
+        max-width: 100%;
+        font-weight: 600;
+        height: 48px;
+    }
+ </style>
+  
+</html>

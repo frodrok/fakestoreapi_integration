@@ -1,0 +1,128 @@
+<html>
+  <head>
+  <meta charset="utf8">
+  <title>Fakestoreapi Products</title>
+  <link href="http://fonts.cdnfonts.com/css/averta-blackitalic" rel="stylesheet">
+  </head>
+  <body>
+
+    <div id="sorting">
+      <form method="GET" action="/products">
+        <label for="price_min">Price min</label>
+        <input type="text" name="price_min" placeholder="Min price">
+        <label for="price_max">Price max</label>
+        <input type="text" name="price_max" placeholder="Max price">
+
+        <label for="category">Category</label>
+        <select name="category">
+          {% if available_categories %}
+          {% for category in available_categories %}
+          <option value="{{ category }}">{{ category }}</option>
+          {% endfor %}
+          {% endif %}
+        </select>
+        <button type="submit">Filter</button>
+      </form>
+
+      <form method="GET" action="/products">
+        <button type="submit">Reset filter</button>
+      </form>
+    </div>
+    
+    {% if products %}
+    <div id="products-grid">
+    {% for product in products %}
+    <div id="product-card">
+      <a href="/products/{{ product.id }}">
+        <!-- <div>{{ product.id }}</div> -->
+        {% if product.image %}
+        <div><img src="{{ product.image }}"></div>
+        {% endif %}
+      
+        <div>{{ product.title }}</div>
+        <div class="description">{{ product.description }}</div>
+        <div class="price-and-rating">
+
+          <div class="rating">
+            <span>{{ product.rating.rate }} / 5 &#11088;</span> <span class="rating-amount">({{ product.rating.count }})</span>
+          </div>
+          <div class="price">${{ product.price }}</div>
+
+          <!-- <div>{{ product.category }}</div> -->
+          <!-- <div>{{ product.foreign_api_id }}</div> -->
+
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+    </div>
+    {% else %}
+    <div>No products are available.</div>
+    {% endif %}
+    
+  </body>
+
+  <style>
+    #product-card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 1em;
+        text-align: center;
+        height: 20em;
+        font-family: Averta,sans-serif;
+        position: relative;
+    }
+
+    .rating-amount {
+        color: #58585a;
+    }
+
+    .price {
+        font-family: Averta,sans-serif;
+        color: #1a1a1d;
+        font-weight: bold;
+    }
+
+    .price-and-rating {
+        margin-top: 1em;
+        display: grid;
+        grid-template-columns: 78% 135%;
+        position: absolute;
+        bottom: 10;
+    }
+
+    #product-card:hover {
+        /* background: #ccc; */
+        border: 1px solid #000;
+    }
+
+    #product-card .description {
+        font-weight: 400;
+        font-family: Averta,sans-serif;
+        color: #58585a;
+        /*        max-width: 60%; */
+        max-height: 40%;
+        overflow: hidden;
+    }
+
+    #products-grid {
+        display: grid;
+        grid-template-columns: 31% 31% 31%;
+        grid-gap: 2%;
+        max-width: 80%;
+        margin: auto;
+    }
+
+    #product-card a {
+        color: #000;
+        text-decoration: none;
+    }
+
+    #product-card img {
+        height: 30%;
+        max-width: 100%;
+        margin: auto;
+    }
+  </style>
+  
+</html>

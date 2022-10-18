@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_PORT=5432
+      - DB_HOST=db
+      - DB_USER=django
+      - DB_PASSWORD=django
+      - DB_NAME=django
+  redis:
+    image: "redis:alpine"
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=django
+      - POSTGRES_PASSWORD=django
+    ports:
+      - "5432:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+volumes:
+  db:
+    driver: local
