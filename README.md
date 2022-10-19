@@ -1,8 +1,20 @@
 # Setup
 
-apt install -y redis
+apt install -y redis postgresql
 
 service redis start
+service postgresql start
+
+sudo su - postgres
+psql
+postgres=# create database django;
+postgres=# create user django with password 'django';
+postgres=# alter role django set client_encoding to 'utf8';
+postgres=# alter role django set default_transaction_isolation to 'read committed';
+postgres=# alter role django set timezone to 'UTC';
+postgres=# grant all privileges on database django to django;
+\q
+exit
 
 python3 -m virtualenv django-venv
 
