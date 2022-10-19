@@ -1,6 +1,9 @@
 # Setup
 
-apt install -y redis postgresql
+(Assuming an ubuntu system)
+
+```bash
+apt install -y redis postgresql python3 python3-dev
 
 service redis start
 service postgresql start
@@ -22,8 +25,12 @@ python3 -m virtualenv django-venv
 
 pip3 install "setuptools<58.0.0"
 pip3 install -r requirements.txt
+```
 
-# Set database connection values
+
+
+#### Set database connection values
+```bash
 export DB_PORT=5432
 export DB_HOST="localhost"
 export DB_USER="django"
@@ -35,11 +42,15 @@ python3 manage.py makemigrations django_q
 
 python3 manage.py migrate
 python3 manage.py schedule_init
+```
 
-### Run the scheduled jobs in the background
+
+
+#### Run the scheduled jobs in the background and run the server
+```bash
 python3 manage.py qcluster &
-
 python3 manage.py runserver 0.0.0.0:8000
 
 curl http://localhost:8000/products
+
 
